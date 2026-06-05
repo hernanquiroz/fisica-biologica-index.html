@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Dimensional - Física Biológica I</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #003366 0%, #005b9f 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .download-section {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 3px solid #00a8e8;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #00a8e8 0%, #003366 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #003366;
+        }
+
+        .section h2 {
+            color: #003366;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h2::before {
+            content: "📐";
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        .concept-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .concept-card:hover {
+            transform: translateX(10px);
+        }
+
+        .concept-card h3 {
+            color: #005b9f;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        .concept-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .concept-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .concept-card li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #00a8e8;
+            font-weight: bold;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: #003366;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .exercise-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .exercise-box h3 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .interactive-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-btn:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+
+        .solution {
+            display: none;
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .solution.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            background: #003366;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 ANÁLISIS DIMENSIONAL</h1>
+            <p>Física Biológica I - Facultad de Educación</p>
+        </header>
+
+        <div class="download-section">
+            <h2 style="color: #003366; margin-bottom: 20px;">📥 Descarga el Documento Completo</h2>
+            <a href="ANÁLISIS DIMENSIONAL.pdf" class="download-btn" download>
+                ⬇️ Descargar PDF - Análisis Dimensional
+            </a>
+            <p style="margin-top: 15px; color: #666;">
+                Haz clic para descargar el material de estudio completo
+            </p>
+        </div>
+
+        <div class="content">
+            <!-- SECCIÓN 1: CONCEPTOS BÁSICOS -->
+            <div class="section">
+                <h2>Conceptos Fundamentales</h2>
+                
+                <div class="concept-card">
+                    <h3>📏 Magnitud</h3>
+                    <p>Es todo aquello que se puede medir.</p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>📐 Medir</h3>
+                    <p>Comparar una magnitud con otra magnitud de la misma especie. Por ejemplo, podemos realizar las siguientes mediciones:</p>
+                </div>
+
+                <div class="concept-card">
+                    <h3>🌟 Magnitudes Fundamentales</h3>
+                    <p>Son aquellas magnitudes elegidas por convención, que permiten expresar cualquier magnitud física en términos de ellas.</p>
+                    <p style="margin-top: 15px;"><strong>En el Sistema Internacional (SI), tenemos 7 magnitudes fundamentales:</strong></p>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>Longitud (metro - m)</li>
+                        <li>Masa (kilogramo - kg)</li>
+                        <li>Tiempo (segundo - s)</li>
+                        <li>Corriente eléctrica (amperio - A)</li>
+                        <li>Temperatura (kelvin - K)</li>
+                        <li>Cantidad de sustancia (mol - mol)</li>
+                        <li>Intensidad luminosa (candela - cd)</li>
+                    </ul>
+                </div>
+
+                <div class="concept-card">
+                    <h3>⚡ Magnitudes Derivadas</h3>
+                    <p>Son aquellas magnitudes que se expresan en función de las magnitudes fundamentales.</p>
+                    <p style="margin-top: 10px;"><strong>Ejemplos:</strong> área, velocidad, fuerza, trabajo.</p>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 2: FÓRMULAS DIMENSIONALES -->
+            <div class="section">
+                <h2>Fórmulas Dimensionales</h2>
+                <p style="margin-bottom: 20px;">Las fórmulas dimensionales de las magnitudes derivadas son las siguientes:</p>
+                
+                <div class="formula-box">
+                    [Velocidad] = L·T⁻¹
+                </div>
+                <div class="formula-box">
+                    [Aceleración] = L·T⁻²
+                </div>
+                <div class="formula-box">
+                    [Fuerza] = M·L·T⁻²
+                </div>
+                <div class="formula-box">
+                    [Trabajo] = M·L²·T⁻²
+                </div>
+                <div class="formula-box">
+                    [Potencia] = M·L²·T⁻³
+                </div>
+
+                <div class="concept-card" style="margin-top: 30px;">
+                    <h3>🎯 El Análisis Dimensional nos permite:</h3>
+                    <ul>
+                        <li>Comprobar la veracidad de las fórmulas físicas mediante el principio de homogeneidad dimensional.</li>
+                        <li>Expresar las magnitudes derivadas en función de las magnitudes fundamentales.</li>
+                        <li>Determinar fórmulas empíricas a partir de datos experimentales.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 3: CINEMÁTICA -->
+            <div class="section">
+                <h2>Fórmulas de Cinemática</h2>
+                <p style="margin-bottom: 20px;">Estas fórmulas te van a servir para calcular variables como la velocidad, aceleración, desplazamiento y tiempo, con algunos datos y las condiciones en que se lleva a cabo el movimiento.</p>
+                
+                <div class="formula-box">
+                    v = v₀ + a·t
+                </div>
+                <div class="formula-box">
+                    x = x₀ + v₀·t + ½·a·t²
+                </div>
+                <div class="formula-box">
+                    v² = v₀² + 2·a·(x - x₀)
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Símbolo</th>
+                                <th>Nombre Técnico</th>
+                                <th>Unidad Principal (SI)</th>
+                                <th>Símbolo de la Unidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>θ</td>
+                                <td>Desplazamiento angular</td>
+                                <td>Radián</td>
+                                <td>rad</td>
+                            </tr>
+                            <tr>
+                                <td>ω₀</td>
+                                <td>Velocidad angular inicial</td>
+                                <td>Radián por segundo</td>
+                                <td>rad/s</td>
+                            </tr>
+                            <tr>
+                                <td>ω</td>
+                                <td>Velocidad angular final</td>
+                                <td>Radián por segundo</td>
+                                <td>rad/s</td>
+                            </tr>
+                            <tr>
+                                <td>α</td>
+                                <td>Aceleración angular</td>
+                                <td>Radián por segundo al cuadrado</td>
+                                <td>rad/s²</td>
+                            </tr>
+                            <tr>
+                                <td>t</td>
+                                <td>Tiempo</td>
+                                <td>Segundo</td>
+                                <td>s</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECCIÓN 4: VERIFICACIÓN DE HOMOGENEIDAD -->
+            <div class="section">
+                <h2>Verificación de Homogeneidad</h2>
+                <p style="margin-bottom: 20px;">En estos problemas debes demostrar que la ecuación dada es dimensionalmente correcta reemplazando cada variable por sus dimensiones fundamentales.</p>
+
+                <div class="exercise-box">
+                    <h3>📝 Ejercicio 1: Verificación de la ecuación de velocidad final</h3>
+                    <p>Demuestra la homogeneidad dimensional de la fórmula:</p>
+                    <div class="formula-box" style="margin: 15px 0;">
+                        v = v₀ + a·t
+                    </div>
+                    <button class="interactive-btn" onclick="toggleSolution('sol1')">Ver Solución</button>
+                    <div id="sol1" class="solution">
+                        <strong>Solución:</strong><br>
+                        [v] = L·T⁻¹<br>
+                        [v₀] = L·T⁻¹<br>
+                        [a·t] = (L·T⁻²)·(T) = L·T⁻¹<br><br>
+                        ✓ Todos los términos tienen las mismas dimensiones: <strong>L·T⁻¹</strong><br>
+                        ∴ La ecuación es dimensionalmente homogénea
+                    </div>
+                </div>
+
+                <div class="exercise-box">
+                    <h3>📝 Ejercicio 2: Verificación de la ecuación de posición angular</h3>
+                    <p>Comprueba que los dos términos del lado derecho de la siguiente ecuación tienen la dimensión correcta de un ángulo (adimensional):</p>
+                    <div class="formula-box" style="margin: 15px 0;">
+                        θ = θ₀ + ω₀·t + ½·α·t²
+                    </div>
+                    <button class="interactive-btn" onclick="toggleSolution('sol2')">Ver Solución</button>
+                    <div id="sol2" class="solution">
+                        <strong>Solución:</strong><br>
+                        [θ] = 1 (adimensional)<br>
+                        [θ₀] = 1 (adimensional)<br>
+                        [ω₀·t] = (T⁻¹)·(T) = 1<br>
+                        [α·t²] = (T⁻²)·(T²) = 1<br><br>
+                        ✓ Todos los términos son adimensionales<br>
+                        ∴ La ecuación es dimensionalmente homogénea
+                    </div>
+                </div>
+
+                <div class="exercise-box">
+                    <h3>📝 Ejercicio 3: Verificación con raíces cuadradas</h3>
+                    <p>Analiza dimensionalmente la siguiente ecuación para comprobar que el lado izquierdo y el derecho coinciden:</p>
+                    <div class="formula-box" style="margin: 15px 0;">
+                        v = √(v₀² + 2·a·x)
+                    </div>
+                    <button class="interactive-btn" onclick="toggleSolution('sol3')">Ver Solución</button>
+                    <div id="sol3" class="solution">
+                        <strong>Solución:</strong><br>
+                        [v] = L·T⁻¹<br>
+                        [v₀²] = (L·T⁻¹)² = L²·T⁻²<br>
+                        [a·x] = (L·T⁻²)·(L) = L²·T⁻²<br>
+                        [√(v₀² + 2·a·x)] = √(L²·T⁻²) = L·T⁻¹<br><br>
+                        ✓ Ambos lados tienen dimensión: <strong>L·T⁻¹</strong><br>
+                        ∴ La ecuación es dimensionalmente homogénea
+                    </div>
+                </div>
+
+                <div class="exercise-box">
+                    <h3>📝 Ejercicio 4: Verificación de la aceleración despejada</h3>
+                    <p>Demuestra mediante análisis dimensional que la constante 2 no afecta las dimensiones de la igualdad en la siguiente fórmula:</p>
+                    <div class="formula-box" style="margin: 15px 0;">
+                        a = (v - v₀) / (2·t)
+                    </div>
+                    <button class="interactive-btn" onclick="toggleSolution('sol4')">Ver Solución</button>
+                    <div id="sol4" class="solution">
+                        <strong>Solución:</strong><br>
+                        [a] = L·T⁻²<br>
+                        [v - v₀] = L·T⁻¹<br>
+                        [t] = T<br>
+                        [(v - v₀)/(2·t)] = (L·T⁻¹)/(T) = L·T⁻²<br>
+                        (Nota: el 2 es adimensional)<br><br>
+                        ✓ Ambos lados tienen dimensión: <strong>L·T⁻²</strong><br>
+                        ∴ La ecuación es dimensionalmente homogénea
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Física Biológica I</strong></p>
+            <p>Facultad de Educación - Universidad de Antioquia</p>
+            <p style="margin-top: 10px;">© 2026 - Material Educativo</p>
+        </footer>
+    </div>
+
+    <script>
+        function toggleSolution(id) {
+            const solution = document.getElementById(id);
+            solution.classList.toggle('show');
+        }
+
+        // Animación de entrada
+        window.addEventListener('load', () => {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>

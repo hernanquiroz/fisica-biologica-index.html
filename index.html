@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Física Biológica I - Ejes Temáticos | Prof. Hernán Quiroz</title>
+    <title>Física Biológica I - Ejes Temáticos</title>
     <style>
         /* --- Estilos Generales y Reset --- */
         :root {
@@ -29,23 +29,22 @@
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             text-align: center;
-            padding: 2rem 1rem;
+            padding: 2.5rem 1rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
         header p { font-size: 1.1rem; opacity: 0.9; max-width: 800px; margin: 0 auto; }
         
-        /* Estilo para el crédito del profesor */
-        .profesor-credit {
-            margin-top: 1rem;
-            font-size: 0.95rem;
-            background-color: rgba(255,255,255,0.2);
+        .professor-info {
             display: inline-block;
-            padding: 0.4rem 1.2rem;
-            border-radius: 30px;
-            backdrop-filter: blur(2px);
-            font-weight: 500;
+            background-color: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            margin-top: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
         }
 
         /* --- Contenedor Principal --- */
@@ -178,9 +177,10 @@
             filter: brightness(1.1);
         }
 
-        .btn-pdf { background-color: #d32f2f; }
-        .btn-worksheet { background-color: #f39c12; }
-        .btn-quiz { background-color: #9b59b6; }
+        .btn-pdf { background-color: #d32f2f; } /* Rojo para PDFs */
+        .btn-worksheet { background-color: #f39c12; } /* Naranja para hojas de trabajo */
+        .btn-quiz { background-color: #9b59b6; } /* Morado para cuestionarios */
+        .btn-questions { background-color: #27ae60; } /* Verde para preguntas orientadoras */
         
         .resource-btn span { margin-right: 8px; font-size: 1.1rem; }
 
@@ -205,8 +205,9 @@
         <h1>Física Biológica I</h1>
         <p>Programa de Curso: Ejes Problémicos y Temáticos<br>
         <small>Facultad de Educación - Pedagogía en Enseñanza de las Ciencias</small></p>
-        <!-- Crédito solicitado por el profesor -->
-        <div class="profesor-credit">📘 Aplicación elaborada por el Profesor: Hernán Quiroz</div>
+        <div class="professor-info">
+            👨‍🏫 Profesor: Hernán Quiroz
+        </div>
     </header>
 
     <main class="container">
@@ -229,13 +230,24 @@
                                 <li>¿Cuáles son las representaciones geométricas de las magnitudes físicas: vectores?</li>
                             </ul>
                             
+                            <!-- BOTONES DE DESCARGA CON LINKS DE BOX -->
                             <div class="resource-links">
-                                <a href="https://app.box.com/shared/static/mecbwsitjzpihil68poyln8o3fdqpkzd.pdf" class="resource-btn btn-worksheet" target="_blank" rel="noopener noreferrer">
+                                <!-- NUEVO: Link a Preguntas Orientadoras -->
+                                <a href="https://app.box.com/shared/static/lrhgzwwvtxxc5cgf2w6ttatnpczl85iw.pdf" class="resource-btn btn-questions" target="_blank">
+                                    <span>❓</span> Preguntas Orientadoras
+                                </a>
+                                
+                                <!-- Link 1: Notación Científica -->
+                                <a href="https://app.box.com/shared/static/mecbwsitjzpihil68poyln8o3fdqpkzd.pdf" class="resource-btn btn-worksheet" target="_blank">
                                     <span>🔢</span> Descargar: Notación Científica
                                 </a>
-                                <a href="https://app.box.com/shared/static/0w1jbhgsndxzn3tdwjmhhh6e8fyv650b.pdf" class="resource-btn btn-pdf" target="_blank" rel="noopener noreferrer">
+                                
+                                <!-- Link 2: Análisis Dimensional -->
+                                <a href="https://app.box.com/shared/static/0w1jbhgsndxzn3tdwjmhhh6e8fyv650b.pdf" class="resource-btn btn-pdf" target="_blank">
                                     <span>📐</span> Descargar: Análisis Dimensional
                                 </a>
+                                
+                                <!-- Botón de ejemplo para Cuestionario -->
                                 <a href="#" class="resource-btn btn-quiz" onclick="alert('Enlace al cuestionario pendiente')">
                                     <span>📋</span> Realizar Cuestionario
                                 </a>
